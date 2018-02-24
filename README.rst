@@ -31,8 +31,10 @@ Etcher's Mission Files Tool
     :alt: 'License'
 .. |codacy| image:: https://img.shields.io/codacy/grade/d4699411cc594094bb926601ece926a0.svg
     :target: https://www.codacy.com/app/132nd-etcher/emiz
+    :alt: 'Codacy grade'
 .. |coverage| image:: https://img.shields.io/codacy/coverage/d4699411cc594094bb926601ece926a0.svg
     :target: https://www.codacy.com/app/132nd-etcher/emiz
+    :alt: 'Codacy coverage'
 .. |cdcq| image:: https://img.shields.io/codacy/grade/d4699411cc594094bb926601ece926a0/master.svg
     :target: https://www.codacy.com/app/132nd-etcher/emiz
     :alt: 'Codacy grade'
