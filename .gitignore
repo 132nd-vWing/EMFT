@@ -1,2 +1,5 @@
 .idea
 /Pipfile.lock
+*.pyc
+*.log
+emft.yml

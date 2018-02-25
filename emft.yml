@@ -1,0 +1,20 @@
+# Uncomment in order to have a more verbose output
+debug: 'true'
+
+# Source folder
+#
+# This folder contains the "*.miz" files.
+# This is where you should save your missions, and this
+# is where EMFT will download the missions from Appveyor
+source_folder: 'C:\Users\bob\Saved Games\DCS\Missions\132nd'
+
+# Github
+#
+# You'll need to provide
+github: '132nd-vWing/132nd-Virtual-Wing-Training-Mission-Tblisi'
+
+# Appveyor
+#
+# EMFT will automatically download
+appveyor: '132nd-VirtualWing/132nd-virtual-wing-training-mission-tblisi
+branch:

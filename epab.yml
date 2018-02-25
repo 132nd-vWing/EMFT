@@ -1,0 +1,9 @@
+package: 'emft'
+
+doc:
+  repo: 'https://github.com/132nd-etcher/emft-doc.git'
+  folder: './emft-doc'
+
+test:
+  runner_options:
+  av_runner_options: '--long'
