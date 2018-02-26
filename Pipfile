@@ -9,6 +9,7 @@ name = "pypi"
 
 click = "*"
 emiz = "*"
+python-dateutil = "*"
 
 
 [dev-packages]

@@ -14,6 +14,8 @@ class _Val(elib.config.ConfigProp):
         if self.parser is Path:
             return super(_Val, self).__get__(instance, owner).absolute()
 
+        return super(_Val, self).__get__(instance, owner)
+
 
 class Config(elib.config.BaseConfig):
     """
@@ -22,6 +24,7 @@ class Config(elib.config.BaseConfig):
 
     debug: bool = _Val(bool, default='false')
     source_folder: bool = _Val(Path, default='false')
+    appveyor: str = _Val(str)
 
     def __init__(self):
         elib.config.BaseConfig.__init__(self, 'EMFT')
