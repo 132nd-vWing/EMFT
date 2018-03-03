@@ -75,7 +75,8 @@ def _decompose():
     setup_repo()
     mission = mission_file.get_latest_miz_file_in_source_folder()
     if mission:
-        NewMiz.decompose(mission, Path('output').absolute())
+        LOGGER.info(f'decomposing mission: "{mission}"')
+        NewMiz.decompose(mission, Path('.').absolute())
         LOGGER.info('all done!')
         exit_(0)
     else:
