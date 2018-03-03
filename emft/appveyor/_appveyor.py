@@ -8,6 +8,7 @@ import elib
 import requests
 import requests.exceptions
 
+from emft.context import CONTEXT
 from ._artifact import Artifact
 from ._generic_build import GenericBuild
 
@@ -38,11 +39,8 @@ def _get_latest_build_on_current_branch(repo) -> typing.Optional[GenericBuild]:
 
     :return: GenericBuild
     """
-    current_branch = elib.repo.Repo().get_current_branch()
-    _LOGGER.debug(f'current branch: {current_branch}')
-    # TODO: remove
-    current_branch = 'master'
-    build_json = _req(f'https://ci.appveyor.com/api/projects/{repo}/branch/{current_branch}')
+    _LOGGER.debug(f'current branch: {CONTEXT.branch}')
+    build_json = _req(f'https://ci.appveyor.com/api/projects/{repo}/branch/{CONTEXT.branch}')
     if not build_json:
         return
     return GenericBuild(build_json['build'])
@@ -92,6 +90,9 @@ def get_latest_release(repo) -> typing.Optional[Artifact]:
     :return: Artifact object
     """
     build = _get_latest_build_on_current_branch(repo)
+    if not build:
+        _LOGGER.error('it seems this branch does not exist (yet?) on Appveyor')
+        return
     job_id = _get_first_job_id_with_artifacts(build)
     artifacts = _get_artifacts_from_job_id(job_id)
     for artifact in artifacts:

@@ -7,3 +7,5 @@ emft.yml
 /dist/
 /emft.spec
 /test.miz
+/test_recompose.json
+/output/

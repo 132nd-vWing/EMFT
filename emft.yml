@@ -6,7 +6,7 @@ debug: 'true'
 # This folder contains the "*.miz" files.
 # This is where you should save your missions, and this
 # is where EMFT will download the missions from Appveyor
-source_folder: 'C:\Users\bob\Saved Games\DCS\Missions\132nd\TRMT'
+source_folder: 'C:\Users\bob\Saved Games\DCS\Missions\132nd\test'
 
 # Github
 #
