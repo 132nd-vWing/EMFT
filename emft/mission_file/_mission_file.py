@@ -14,16 +14,16 @@ class MissionFile(NewMiz):
         NewMiz.__init__(self, path)
 
 
-    def decompose(self, output_folder: Path):
-        if output_folder.exists():
-            shutil.rmtree(output_folder.absolute())
-        self.unzip()
-        ignore = shutil.ignore_patterns('mission', 'mapResource', 'dictionary')
-        shutil.copytree(self.temp_dir, output_folder.absolute(), ignore=ignore)
-        self.decode()
-        self._version = self.mission.d['version']
-        mission_folder = output_folder.joinpath('mission')
-        self._decompose_dict(self.mission.d, 'base_info', mission_folder)
+    # def decompose(self, output_folder: Path):
+    #     if output_folder.exists():
+    #         shutil.rmtree(output_folder.absolute())
+    #     self.unzip()
+    #     ignore = shutil.ignore_patterns('mission', 'mapResource', 'dictionary')
+    #     shutil.copytree(self.temp_dir, output_folder.absolute(), ignore=ignore)
+    #     self.decode()
+    #     self._version = self.mission.d['version']
+    #     mission_folder = output_folder.joinpath('mission')
+    #     self._decompose_dict(self.mission.d, 'base_info', mission_folder)
 
 
     def __repr__(self):

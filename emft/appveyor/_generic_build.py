@@ -15,10 +15,6 @@ def _natural_datetime(datetime: str) -> str:
     return humanize.naturalday(dateutil.parser.parse(datetime))
 
 
-def _parse_artifacts(list_of_artifact):
-    return [Artifact(artifact) for artifact in list_of_artifact]
-
-
 class GenericBuild:
     """
     Appveyor build

@@ -9,6 +9,7 @@ from pathlib import Path
 
 import click
 import elib
+from emiz.new_miz import NewMiz
 
 from emft import __version__, mission_file
 from emft.mission_file import MissionFile
@@ -59,8 +60,7 @@ def mirror_dir(src: Path, dst: Path):
 @click.command('recompose')
 def _recompose():
     Path('output.miz').touch()
-    mission_file_ = MissionFile('output.miz')
-    mission_file_.recompose(Path('output/mission'), mission_file_.miz_path)
+    NewMiz.recompose(Path('output/mission'), Path('outpit.miz'))
 
 
 def _setup_logging():
@@ -75,8 +75,7 @@ def _decompose():
     setup_repo()
     mission = mission_file.get_latest_miz_file_in_source_folder()
     if mission:
-        LOGGER.info(f'decomposing mission: {mission.miz_path}')
-        mission.decompose(Path('output').absolute())
+        NewMiz.decompose(mission, Path('output').absolute())
         LOGGER.info('all done!')
         exit_(0)
     else:

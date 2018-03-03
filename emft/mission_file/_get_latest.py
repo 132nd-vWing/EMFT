@@ -7,7 +7,6 @@ import natsort
 
 from emft import appveyor
 from emft.context import CONTEXT
-from ._mission_file import MissionFile
 
 LOGGER = elib.custom_logging.get_logger('EMFT')
 
@@ -23,20 +22,20 @@ def _latest_artifact() -> typing.Optional[appveyor.Artifact]:
     return latest_artifact
 
 
-def _get_latest_miz_in_source_folder() -> typing.Optional[MissionFile]:
+def _get_latest_miz_in_source_folder() -> typing.Optional[Path]:
     available_mission = set()
     for mission_file in CONTEXT.source_folder.iterdir():
         if mission_file.name.endswith('.miz'):
             mission_file = mission_file.absolute()
             available_mission.add(mission_file)
     if available_mission:
-        return MissionFile(natsort.natsorted(available_mission, reverse=True)[0].absolute())
+        return natsort.natsorted(available_mission, reverse=True)[0].absolute()
 
     LOGGER.warning(f'there is no mission file (yet?) in "{CONTEXT.source_folder}"')
     return None
 
 
-def get_latest_miz_file_in_source_folder() -> typing.Optional[MissionFile]:
+def get_latest_miz_file_in_source_folder() -> typing.Optional[Path]:
     latest_artifact = _latest_artifact()
     if not latest_artifact:
         return _get_latest_miz_in_source_folder()
@@ -44,4 +43,4 @@ def get_latest_miz_file_in_source_folder() -> typing.Optional[MissionFile]:
     if not mission_path.exists():
         LOGGER.warning(f'downloading latest mission from Appveyor into source folder: "{mission_path}"')
         latest_artifact.download(mission_path)
-    return MissionFile(mission_path)
+    return mission_path
