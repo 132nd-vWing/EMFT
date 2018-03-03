@@ -12,7 +12,7 @@ import elib
 from emiz.new_miz import NewMiz
 
 from emft import __version__, mission_file
-from emft.mission_file import MissionFile
+from ._print_version import print_version
 from emft.config import CONFIG
 from emft.context import CONTEXT
 from emft.exit_ import exit_
@@ -58,9 +58,22 @@ def mirror_dir(src: Path, dst: Path):
 
 
 @click.command('recompose')
-def _recompose():
-    Path('output.miz').touch()
-    NewMiz.recompose(Path('output/mission'), Path('outpit.miz'))
+@click.option('-f', '--filename',
+              type=click.Path(dir_okay=False, writable=True, readable=True),
+              default='output.miz',
+              show_default=True,
+              help='Resulting MIZ file')
+def _recompose(filename: str):
+    """
+    Recreates a MIZ file
+    """
+    if not filename.endswith('.miz'):
+        filename = f'{filename}.miz'
+    filename = Path(filename).absolute()
+    path = Path('.').absolute()
+    LOGGER.info(f'recomposing mission from "{path}" into "{filename}"')
+    Path(filename).touch()
+    NewMiz.recompose(path, filename)
 
 
 def _setup_logging():
@@ -85,11 +98,21 @@ def _decompose():
 
 
 @click.group(invoke_without_command=True)
-@click.option('-d', '--debug', help='More console output', default=False, is_flag=True, show_default=True)
+@click.option('-d', '--debug',
+              default=False,
+              is_flag=True,
+              show_default=True,
+              help='More console output')
+@click.option('-v', '--version',
+              is_flag=True,
+              is_eager=True,
+              expose_value=False,
+              callback=print_version,
+              help='Print version and exit')
 @click.pass_context
 def cli(ctx: click.Context, debug: bool = False):
     """
-    Main CLI entry-point
+    Decomposes a MIZ file into its components
     """
     CONTEXT.debug = debug or CONFIG.debug
     CONTEXT.source_folder = CONFIG.source_folder
